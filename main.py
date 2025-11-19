@@ -2,6 +2,7 @@
 from build123d import *
 
 # KEEP custom export_all method:
+from build123d import Shape
 def export_all(shape: Shape, base_filename: str = "export_"):
     import datetime
 
