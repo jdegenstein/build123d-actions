@@ -10,10 +10,18 @@ def export_all(shape: Shape, base_filename: str = "export_"):
     now = datetime.datetime.now()
     base_timestamped = base_filename + now.strftime('%Y%m%d%H%M%S')
 
-    for func, ext in zip((export_step, export_stl, export_brep, export_gltf),(".step", ".stl", ".brep", "gltf")):
+    for func, ext in zip((export_step, export_stl, export_brep, export_gltf),(".step", ".stl", ".brep", ".gltf")):
         func(shape, base_timestamped + ext)
 
-    # TODO: add SVG, DXF, 3MF via Mesher -- consider STL via Mesher
+    for cls, ext in zip((ExportSVG, ExportDXF, Mesher), (".svg", ".dxf", ".3mf"))
+        try:
+            exporter = cls()
+            exporter.add_shape(shape)
+            exporter.write(base_timestamped + ext)
+        except:
+            print(f"Export failed using: {cls.__name__}")
+    
+    # TODO: consider STL via Mesher
 
 ############## add your model generation here: ##################
 pts = [
