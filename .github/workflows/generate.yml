@@ -1,0 +1,34 @@
+name: test
+
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup Python
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: false
+          python-version: "3.12"
+          activate-environment: true
+      - name: Install requirements
+        shell: bash
+        run: |
+          uv pip install .
+      - name: Execute main.py and generate export files
+        shell: bash
+        run: |
+          python main.py
+      - name: Uploaded generated exports (e.g. STEP, STL, etc)
+        uses: actions/upload-artifact@v5
+        with:
+          path: |
+            **/*.[sS][tT][eE][pP]
+            **/*.[sS][tT][lL]
+            **/*.[3][mM][fF]
+            **/*.[bB][rR][eE][pP]
+            **/*.[gG][lL][tT][fF]
+            **/*.[gG][lL][bB]
+            **/*.[sS][vV][gG]
+            **/*.[dD][xX][fF]
