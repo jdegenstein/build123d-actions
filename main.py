@@ -13,6 +13,8 @@ def export_all(shape: Shape, base_filename: str = "export_"):
     for func, ext in zip((export_step, export_stl, export_brep, export_gltf),(".step", ".stl", ".brep", ".gltf")):
         func(shape, base_timestamped + ext)
 
+    export_gltf(shape, base_timestamped + ".glb", binary=True)
+    
     for cls, ext in zip((ExportSVG, ExportDXF, Mesher), (".svg", ".dxf", ".3mf")):
         try:
             exporter = cls()
