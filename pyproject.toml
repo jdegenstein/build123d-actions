@@ -1,0 +1,9 @@
+[project]
+name = "build123d_actions"
+version = "0.0.1"
+dependencies = [
+  "build123d @ git+https://github.com/gumyr/build123d.git@dev",
+  "ocp_vscode",
+  "bd_warehouse @ git+https://github.com/gumyr/bd_warehouse.git@main",
+  # "gggears @ git+https://github.com/GarryBGoode/gggears.git@main",
+]
